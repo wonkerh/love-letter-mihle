@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To My Dearest Mihle</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #2c1810;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(139, 69, 19, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(101, 67, 33, 0.3) 0%, transparent 50%),
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 0, 0, 0.1) 2px,
+                    rgba(0, 0, 0, 0.1) 3px
+                );
+            font-family: 'Courier New', 'American Typewriter', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Scroll container */
+        .scroll-container {
+            width: 100%;
+            max-width: 700px;
+            height: 600px;
+            overflow-y: auto;
+            position: relative;
+            margin-top: 20px;
+            border: 2px solid #654321;
+            border-radius: 3px;
+            background: #1a120b;
+            scroll-behavior: smooth;
+        }
+        
+        /* Hide scrollbar but keep functionality */
+        .scroll-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .scroll-container::-webkit-scrollbar-track {
+            background: #1a120b;
+        }
+        
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: #8b4513;
+            border-radius: 4px;
+        }
+        
+        /* Vintage paper with tea stains */
+        .paper {
+            background-color: #f5e9d8;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d4a76a' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E"),
+                linear-gradient(to bottom, transparent 95%, rgba(212, 167, 106, 0.2) 100%);
+            border: 1px solid #d4a76a;
+            padding: 40px;
+            position: relative;
+            box-shadow: 
+                inset 0 0 100px rgba(212, 167, 106, 0.2);
+            border-radius: 2px;
+            min-height: 1000px; /* Extra height for scrolling */
+        }
+        
+        /* Paper tears and worn edges */
+        .paper::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: 
+                linear-gradient(45deg, transparent 30%, rgba(139, 69, 19, 0.1) 50%, transparent 70%),
+                linear-gradient(135deg, transparent 30%, rgba(139, 69, 19, 0.1) 50%, transparent 70%);
+            z-index: -1;
+            border-radius: 5px;
+            filter: blur(3px);
+        }
+        
+        /* Stains on paper */
+        .stain {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+        
+        .stain-1 {
+            width: 120px;
+            height: 100px;
+            background: #8b4513;
+            top: 15%;
+            left: 10%;
+            transform: rotate(20deg);
+        }
+        
+        .stain-2 {
+            width: 80px;
+            height: 60px;
+            background: #654321;
+            bottom: 20%;
+            right: 15%;
+            transform: rotate(-15deg);
+        }
+        
+        .stain-3 {
+            width: 60px;
+            height: 80px;
+            background: #a0522d;
+            top: 40%;
+            right: 25%;
+            transform: rotate(45deg);
+        }
+        
+        /* Typewriter ribbon effect */
+        .ribbon {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                #8b4513 10%, 
+                #654321 50%, 
+                #8b4513 90%, 
+                transparent 100%);
+            z-index: 2;
+        }
+        
+        /* Letter content */
+        .letter-content {
+            font-size: 1.15em;
+            line-height: 1.8;
+            color: #3a2618;
+            position: relative;
+            z-index: 1;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            white-space: pre-wrap;
+        }
+        
+        /* Typewriter cursor */
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background-color: #8b4513;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+            margin-left: 1px;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        /* Old typewriter keys visual */
+        .typewriter-keys {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .key {
+            width: 40px;
+            height: 40px;
+            background: #8b4513;
+            border: 2px solid #654321;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f5e9d8;
+            font-family: monospace;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.1s;
+            box-shadow: inset 0 -2px 0 #3a2618;
+        }
+        
+        .key:hover {
+            background: #a0522d;
+            transform: translateY(-2px);
+        }
+        
+        .key:active {
+            transform: translateY(0);
+            box-shadow: inset 0 2px 0 #3a2618;
+        }
+        
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            background: #8b4513;
+            border: 2px solid #654321;
+            color: #f5e9d8;
+            padding: 10px 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+            box-shadow: 0 4px 0 #3a2618;
+        }
+        
+        .control-btn:hover {
+            background: #a0522d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #3a2618;
+        }
+        
+        .control-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 0 #3a2618;
+        }
+        
+        /* Vintage letterhead */
+        .letterhead {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #d4a76a;
+            position: relative;
+        }
+        
+        .letterhead h1 {
+            color: #8b4513;
+            font-size: 1.8em;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            font-family: 'Times New Roman', serif;
+        }
+        
+        .letterhead::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 25%;
+            width: 50%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #8b4513, transparent);
+        }
+        
+        /* Progress indicator */
+        .progress {
+            width: 100%;
+            max-width: 700px;
+            margin-top: 20px;
+            background: #3a2618;
+            border: 2px solid #654321;
+            border-radius: 3px;
+            overflow: hidden;
+            height: 8px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #8b4513, #d4a76a);
+            width: 0%;
+            transition: width 0.3s ease;
+            box-shadow: inset 0 0 10px rgba(212, 167, 106, 0.5);
+        }
+        
+        /* Sound indicator */
+        .sound-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(139, 69, 19, 0.9);
+            border: 2px solid #654321;
+            color: #f5e9d8;
+            padding: 8px 12px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.9em;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 4px 0 #3a2618;
+        }
+        
+        .sound-indicator:hover {
+            background: rgba(160, 82, 45, 0.9);
+        }
+        
+        /* Signature area */
+        .signature-area {
+            margin-top: 50px;
+            text-align: right;
+            padding-top: 20px;
+            border-top: 1px dashed #d4a76a;
+            font-family: 'Brush Script MT', cursive;
+            font-size: 1.5em;
+            color: #8b4513;
+            opacity: 0.8;
+        }
+        
+        /* Dust particles for atmosphere */
+        .dust {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: rgba(212, 167, 106, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Print button style */
+        .print-btn {
+            background: #d4a76a;
+            border: 2px solid #8b4513;
+            color: #3a2618;
+            font-weight: bold;
+        }
+        
+        /* Auto-scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: #8b4513;
+            font-size: 0.8em;
+            opacity: 0.7;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 0.3; }
+        }
+        
+        @media (max-width: 768px) {
+            .scroll-container {
+                height: 500px;
+            }
+            
+            .paper {
+                padding: 20px;
+            }
+            
+            .letter-content {
+                font-size: 1em;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .control-btn {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dust particles -->
+    <div id="dust-container"></div>
+    
+    <!-- Stains on paper -->
+    <div class="stain stain-1"></div>
+    <div class="stain stain-2"></div>
+    <div class="stain stain-3"></div>
+    
+    <!-- Typewriter ribbon -->
+    <div class="ribbon"></div>
+    
+    <!-- Scroll container with paper -->
+    <div class="scroll-container" id="scroll-container">
+        <div class="paper">
+            <div class="letterhead">
+                <h1>Personal Correspondence</h1>
+                <div style="color: #8b4513; font-size: 0.9em;">
+                    Confidential • For Mihle Dingiso Only
+                </div>
+            </div>
+            
+            <div class="letter-content" id="letter-content">
+<span class="cursor"></span>
+            </div>
+            
+            <div class="signature-area" id="signature-area">
+                <!-- Will appear when typing is complete -->
+            </div>
+            
+            <div class="scroll-indicator">Auto-scrolling ▼</div>
+        </div>
+    </div>
+    
+    <!-- Typewriter keys (visual) -->
+    <div class="typewriter-keys">
+        <div class="key" onclick="startTyping()">START</div>
+        <div class="key" onclick="pauseTyping()">PAUSE</div>
+        <div class="key" onclick="resumeTyping()">RESUME</div>
+        <div class="key" onclick="skipToEnd()">END</div>
+    </div>
+    
+    <div class="progress">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    
+    <div class="controls">
+        <button class="control-btn" onclick="startTyping()">▶ BEGIN TYPING</button>
+        <button class="control-btn" onclick="pauseTyping()">⏸ PAUSE</button>
+        <button class="control-btn" onclick="resumeTyping()">⏯ RESUME</button>
+        <button class="control-btn" onclick="skipToEnd()">⏭ SKIP TO END</button>
+        <button class="control-btn print-btn" onclick="printLetter()">🖨 PRINT LETTER</button>
+        <button class="control-btn" onclick="toggleSound()">🔊 SOUND</button>
+    </div>
+    
+    <div class="sound-indicator" onclick="toggleSound()">
+        🔊 TYPEWRITER SOUND: <span id="sound-status">ON</span>
+    </div>
+    
+    <script>
+        // Your beautiful letter
+        const letter = `To my dearest Mihle Dingiso,
+
+I am writing this because sometimes my voice cannot fully capture the depth of what I feel in my heart. I wanted to take a moment to step away from everything else and focus entirely on you, because you deserve to know exactly how much space you occupy in my mind and my soul. You are not just a part of my life, Mihle; you are the very center of it, the person who gives everything else meaning and purpose.
+
+From the moment I wake up until the second I close my eyes at night, you are the thought that brings a smile to my face. There is a specific kind of light you bring into this world that I haven't found anywhere else. It's in the way you speak, the way you carry yourself, and the way you look at me when nobody else is watching. Being loved by you is the greatest privilege I have ever known, and it is something I will never take for granted.
+
+You have this incredible ability to make the world feel quiet when everything around me is loud. Whenever things get stressful or the weight of the world feels heavy, just thinking of you acts as my anchor. You provide a sense of peace that I didn't even know I was searching for until I found it in you. You are my safe harbor, the place where I can truly be myself without any fear or hesitation.
+
+I admire the woman you are becoming every single day. Your strength, your grace, and your beautiful heart inspire me to be a better man. I watch the way you handle life, and I am constantly in awe of your spirit. You have a kindness that is rare in this world, and being close to that warmth is what keeps me going. You make me want to reach higher and work harder, just so I can provide the life and the happiness you deserve.
+
+I want you to know that you are my absolute priority. In a world full of distractions and temporary things, my commitment to you is permanent. There is nothing and no one that could ever compare to what we share. You are the only person I want to build a future with, the only one I want to share my secrets with, and the only one I want by my side through every high and low that life decides to throw our way.
+
+The way you love me has taught me so much about what it means to be truly seen. You understand the parts of me that I don't even have words for yet. You see my potential even when I doubt myself, and you stand by me with a loyalty that is unmatched. Knowing that I have you in my corner makes me feel like I can take on any challenge. You are my greatest teammate and my most trusted confidante.
+
+I cherish every small moment we spend together, whether we are doing something exciting or just sitting in silence. Those moments are the ones that make up the beautiful fabric of our relationship. The sound of your laughter is my favorite melody, and your happiness is my ultimate goal. I would do anything just to ensure that the light in your eyes never fades and that you always feel like the most cherished woman on earth.
+
+Mihle, you are the person I want to grow old with. I look forward to the years ahead, imagining all the memories we haven't made yet and all the places we have yet to see. I want to be there for every one of your triumphs and hold you through every struggle. I want to be the one who celebrates you the loudest, because I know more than anyone else just how special and irreplaceable you truly are.
+
+Thank you for choosing me every day, just as I choose you. Thank you for the patience you show me and the unconditional love you pour into us. You are a rare gem, a one-of-a-kind soul, and I am the luckiest person alive because I get to call you mine. I promise to protect your heart with everything I have and to never let a day go by where you don't feel like the queen of my world.
+
+As we move forward, I want you to carry this letter in your heart as a reminder of my devotion. No matter where life takes us, my love for you will remain unwavering and deep. You are my everything, Mihle Dingiso—my beginning, my middle, and my forever. I love you more than words can ever truly express, and I am honored to walk this path of life with you by my side.
+
+Always and forever yours,`;
+
+        // Variables
+        let currentChar = 0;
+        let typingSpeed = 40; // milliseconds per character
+        let isTyping = false;
+        let isPaused = false;
+        let typingInterval;
+        let soundEnabled = true;
+        let scrollContainer;
+        
+        // DOM elements
+        const letterContent = document.getElementById('letter-content');
+        const progressBar = document.getElementById('progress-bar');
+        const soundStatus = document.getElementById('sound-status');
+        const signatureArea = document.getElementById('signature-area');
+        
+        // Get scroll container
+        scrollContainer = document.getElementById('scroll-container');
+        
+        // Function to auto-scroll to cursor
+        function scrollToCursor() {
+            if (!scrollContainer) return;
+            
+            const cursor = document.querySelector('.cursor');
+            if (cursor) {
+                // Get cursor position relative to scroll container
+                const cursorRect = cursor.getBoundingClientRect();
+                const containerRect = scrollContainer.getBoundingClientRect();
+                
+                // Calculate if cursor is near bottom of visible area
+                const cursorBottom = cursorRect.bottom;
+                const containerBottom = containerRect.bottom;
+                
+                // If cursor is within 100px of bottom, scroll down
+                if (cursorBottom > containerBottom - 100) {
+                    // Calculate scroll amount
+                    const scrollAmount = cursorBottom - containerBottom + 150;
+                    scrollContainer.scrollBy({
+                        top: scrollAmount,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        }
+        
+        // Preload typewriter sounds
+        const typeSounds = [
+            new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA=='),
+            new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA=='),
+            new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==')
+        ];
+        
+        // Create realistic typewriter click sounds
+        function createTypeSound() {
+            if (!soundEnabled) return;
+            
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            // Typewriter-like frequency
+            oscillator.frequency.value = 200 + Math.random() * 200;
+            oscillator.type = 'square';
+            
+            // Sharp attack and quick decay
+            const now = audioContext.currentTime;
+            gainNode.gain.setValueAtTime(0, now);
+            gainNode.gain.linearRampToValueAtTime(0.2, now + 0.01);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+            
+            oscillator.start(now);
+            oscillator.stop(now + 0.1);
+            
+            // Occasionally add carriage return sound
+            if (Math.random() < 0.05 && currentChar > 100) {
+                setTimeout(() => {
+                    const returnSound = audioContext.createOscillator();
+                    const returnGain = audioContext.createGain();
+                    
+                    returnSound.connect(returnGain);
+                    returnGain.connect(audioContext.destination);
+                    
+                    returnSound.frequency.value = 100;
+                    returnSound.type = 'sawtooth';
+                    
+                    const returnNow = audioContext.currentTime;
+                    returnGain.gain.setValueAtTime(0, returnNow);
+                    returnGain.gain.linearRampToValueAtTime(0.3, returnNow + 0.02);
+                    returnGain.gain.exponentialRampToValueAtTime(0.001, returnNow + 0.3);
+                    
+                    returnSound.start(returnNow);
+                    returnSound.stop(returnNow + 0.3);
+                }, 50);
+            }
+        }
+        
+        // Typewriter effect with auto-scrolling
+        function typeNextCharacter() {
+            if (currentChar >= letter.length) {
+                clearInterval(typingInterval);
+                isTyping = false;
+                
+                // Remove cursor
+                letterContent.innerHTML = letterContent.innerHTML.replace('<span class="cursor"></span>', '');
+                
+                // Add signature
+                setTimeout(() => {
+                    signatureArea.innerHTML = `
+                        With all my love,<br>
+                        <span style="font-size: 1.8em; margin-top: 10px; display: block;">
+                            Wonkerh Mbambo
+                        </span>
+                        <div style="margin-top: 20px; font-size: 0.8em; color: #654321;">
+                            ${new Date().toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            })}
+                        </div>
+                    `;
+                    
+                    // Scroll to show signature
+                    setTimeout(() => {
+                        scrollContainer.scrollTo({
+                            top: scrollContainer.scrollHeight,
+                            behavior: 'smooth'
+                        });
+                    }, 500);
+                    
+                    // Play final bell sound
+                    if (soundEnabled) {
+                        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                        const bell = audioContext.createOscillator();
+                        const bellGain = audioContext.createGain();
+                        
+                        bell.connect(bellGain);
+                        bellGain.connect(audioContext.destination);
+                        
+                        bell.frequency.value = 800;
+                        bell.type = 'sine';
+                        
+                        const now = audioContext.currentTime;
+                        bellGain.gain.setValueAtTime(0, now);
+                        bellGain.gain.linearRampToValueAtTime(0.2, now + 0.1);
+                        bellGain.gain.exponentialRampToValueAtTime(0.001, now + 1);
+                        
+                        bell.start(now);
+                        bell.stop(now + 1);
+                    }
+                }, 500);
+                
+                return;
+            }
+            
+            const nextChar = letter[currentChar];
+            
+            // Play typewriter sound for most characters
+            if (soundEnabled && nextChar !== ' ' && nextChar !== '\n' && Math.random() > 0.3) {
+                createTypeSound();
+            }
+            
+            // Handle special characters
+            if (nextChar === '\n') {
+                letterContent.innerHTML = letterContent.innerHTML.replace('<span class="cursor"></span>', '') + '<br><span class="cursor"></span>';
+            } else if (nextChar === ' ') {
+                letterContent.innerHTML = letterContent.innerHTML.replace('<span class="cursor"></span>', '') + ' <span class="cursor"></span>';
+            } else {
+                letterContent.innerHTML = letterContent.innerHTML.replace('<span class="cursor"></span>', '') + nextChar + '<span class="cursor"></span>';
+            }
+            
+            currentChar++;
+            
+            // Update progress bar
+            const progress = (currentChar / letter.length) * 100;
+            progressBar.style.width = progress + '%';
+            
+            // Auto-scroll to keep cursor visible
+            scrollToCursor();
+            
+            // Add random typing variation
+            if (Math.random() < 0.1) {
+                clearInterval(typingInterval);
+                setTimeout(() => {
+                    if (isTyping && !isPaused) {
+                        typingInterval = setInterval(typeNextCharacter, typingSpeed);
+                    }
+                }, 50 + Math.random() * 100);
+            }
+        }
+        
+        // Start typing
+        function startTyping() {
+            if (isTyping) return;
+            
+            isTyping = true;
+            isPaused = false;
+            letterContent.innerHTML = '<span class="cursor"></span>';
+            signatureArea.innerHTML = '';
+            currentChar = 0;
+            progressBar.style.width = '0%';
+            
+            // Reset scroll position
+            scrollContainer.scrollTo({
+                top: 0,
+                behavior: 'instant'
+            });
+            
+            // Play start sound
+            if (soundEnabled) {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const startSound = audioContext.createOscillator();
+                const startGain = audioContext.createGain();
+                
+                startSound.connect(startGain);
+                startGain.connect(audioContext.destination);
+                
+                startSound.frequency.value = 300;
+                startSound.type = 'sawtooth';
+                
+                const now = audioContext.currentTime;
+                startGain.gain.setValueAtTime(0, now);
+                startGain.gain.linearRampToValueAtTime(0.3, now + 0.05);
+                startGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                
+                startSound.start(now);
+                startSound.stop(now + 0.2);
+            }
+            
+            typingInterval = setInterval(typeNextCharacter, typingSpeed);
+        }
+        
+        // Pause typing
+        function pauseTyping() {
+            if (!isTyping || isPaused) return;
+            
+            isPaused = true;
+            clearInterval(typingInterval);
+            
+            // Play pause sound
+            if (soundEnabled) {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const pauseSound = audioContext.createOscillator();
+                const pauseGain = audioContext.createGain();
+                
+                pauseSound.connect(pauseGain);
+                pauseGain.connect(audioContext.destination);
+                
+                pauseSound.frequency.value = 150;
+                pauseSound.type = 'square';
+                
+                const now = audioContext.currentTime;
+                pauseGain.gain.setValueAtTime(0, now);
+                pauseGain.gain.linearRampToValueAtTime(0.2, now + 0.02);
+                pauseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+                
+                pauseSound.start(now);
+                pauseSound.stop(now + 0.1);
+            }
+        }
+        
+        // Resume typing
+        function resumeTyping() {
+            if (!isTyping || !isPaused) return;
+            
+            isPaused = false;
+            typingInterval = setInterval(typeNextCharacter, typingSpeed);
+        }
+        
+        // Skip to end
+        function skipToEnd() {
+            clearInterval(typingInterval);
+            isTyping = false;
+            currentChar = letter.length;
+            letterContent.innerHTML = letter + '<span class="cursor"></span>';
+            progressBar.style.width = '100%';
+            
+            // Auto-scroll to bottom
+            setTimeout(() => {
+                scrollContainer.scrollTo({
+                    top: scrollContainer.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }, 100);
+            
+            // Remove cursor after a moment
+            setTimeout(() => {
+                letterContent.innerHTML = letterContent.innerHTML.replace('<span class="cursor"></span>', '');
+                
+                // Add signature
+                signatureArea.innerHTML = `
+                    With all my love,<br>
+                    <span style="font-size: 1.8em; margin-top: 10px; display: block;">
+                        Wonkerh Mbambo
+                    </span>
+                    <div style="margin-top: 20px; font-size: 0.8em; color: #654321;">
+                        ${new Date().toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        })}
+                    </div>
+                `;
+            }, 100);
+        }
+        
+        // Toggle sound
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            soundStatus.textContent = soundEnabled ? 'ON' : 'OFF';
+            soundStatus.style.color = soundEnabled ? '#8bff8b' : '#ff8b8b';
+        }
+        
+        // Print letter
+        function printLetter() {
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Love Letter to Mihle</title>
+                    <style>
+                        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text&family=Dancing+Script&display=swap');
+                        body {
+                            font-family: 'Crimson Text', serif;
+                            line-height: 1.8;
+                            max-width: 800px;
+                            margin: 40px auto;
+                            padding: 40px;
+                            color: #3a2618;
+                            background: #f5e9d8;
+                            border: 1px solid #d4a76a;
+                        }
+                        .header {
+                            text-align: center;
+                            margin-bottom: 40px;
+                            border-bottom: 2px solid #d4a76a;
+                            padding-bottom: 20px;
+                        }
+                        .signature {
+                            margin-top: 60px;
+                            font-family: 'Dancing Script', cursive;
+                            font-size: 32px;
+                            color: #8b4513;
+                            text-align: right;
+                        }
+                        .date {
+                            color: #654321;
+                            font-size: 0.9em;
+                            margin-top: 10px;
+                        }
+                        @media print {
+                            body { font-size: 12pt; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h1>To My Dearest Mihle Dingiso</h1>
+                    </div>
+                    <div class="letter">
+                        ${letter.replace(/\n/g, '<br>')}
+                    </div>
+                    <div class="signature">
+                        With all my love,<br>
+                        Wonkerh Mbambo
+                        <div class="date">
+                            ${new Date().toLocaleDateString('en-US', { 
+                                year: 'numeric', 
+                                month: 'long', 
+                                day: 'numeric' 
+                            })}
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.print();
+        }
+        
+        // Create dust particles
+        function createDust() {
+            const container = document.getElementById('dust-container');
+            for (let i = 0; i < 50; i++) {
+                const dust = document.createElement('div');
+                dust.className = 'dust';
+                dust.style.left = `${Math.random() * 100}%`;
+                dust.style.top = `${Math.random() * 100}%`;
+                dust.style.animation = `float ${10 + Math.random() * 20}s linear infinite`;
+                dust.style.animationDelay = `${Math.random() * 5}s`;
+                container.appendChild(dust);
+            }
+        }
+        
+        // Create floating animation for dust
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0% { transform: translateY(0) translateX(0); opacity: 0; }
+                10% { opacity: 0.3; }
+                90% { opacity: 0.3; }
+                100% { transform: translateY(-100vh) translateX(${Math.random() * 100 - 50}px); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Start typing automatically after a short delay
+        window.addEventListener('DOMContentLoaded', () => {
+            createDust();
+            setTimeout(startTyping, 1500);
+        });
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case ' ':
+                    if (isTyping && !isPaused) {
+                        pauseTyping();
+                    } else if (isTyping && isPaused) {
+                        resumeTyping();
+                    }
+                    break;
+                case 'Enter':
+                    startTyping();
+                    break;
+                case 'Escape':
+                    skipToEnd();
+                    break;
+                case 'm':
+                    toggleSound();
+                    break;
+                case 'p':
+                    printLetter();
+                    break;
+            }
+        });
+    </script>
+</body>
+</html>
